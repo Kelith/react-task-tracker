@@ -5,14 +5,8 @@ import { useState } from 'react'
 
 
 const App = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: 'Doctor Appointment',
-      day: 'Feb 5th at 2:30pm',
-      reminder: true
-    }
-  ])
+  const [tasks, setTasks] = useState([])
+  const [showAddTask, setshowAddTask] = useState(false)
 
   const addTask = (task) => {
     // I don't have a backand for the ids ... that's bad practice but only for the purpose of this tutorial
@@ -32,8 +26,8 @@ const App = () => {
 
   return (
     <div className="container">
-      <Header title="Hello"></Header>
-      <AddTask onAdd={addTask}/>
+      <Header onAdd={() => setshowAddTask(!showAddTask)} showAdd={showAddTask}/>
+      {showAddTask && <AddTask onAdd={addTask}/>}
       { tasks.length > 0 ? 
         (
           <Tasks 
